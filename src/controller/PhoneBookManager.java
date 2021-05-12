@@ -15,27 +15,29 @@ public class PhoneBookManager {
 
     public PhoneBookManager() {
     }
-    // ham nhap thông tin danh bạ
-//public void nhapThôngTin(){
-//    System.out.println("Mời nhập số điện thoại");
-//    String telephone = sc.nextLine();
-//    System.out.println("Nhập tên");
-//    String fullName = sc.nextLine();
-//    System.out.println("Mời nhập địa chỉ");
-//    String address = sc.nextLine();
-//    System.out.println("Mời nhập email");
-//    String email = sc.nextLine();
-//    System.out.println("Mời nhập tên facebook");
-//    String fbName = sc.nextLine();
-//}
-////ham checksodienthoai
-//    public void checkNumberPhone() {
-//        System.out.println("Số điện thoại cần tạo");
-//        String numberPhone = "";
-//        numberPhone = sc.nextLine();
-//        if (!checknumberPhoneSake(numberPhone))
-//            System.out.println("Số nay đã tồn tại mời nhập lại");
-//    }
+   //ham nhap emmail
+    public void nhapEmail(){
+        PhoneBook phoneBook = new PhoneBook();
+        String email;
+        System.out.println("Nhập email mới");
+        do {
+            email = sc.next();
+            if(!CheckInput.validate(email)) System.out.println("Nhập sai định dạng email mời nhập lại");
+        }while (!CheckInput.validate(email));
+        phoneBook.getEmail(sc.nextLine());
+    }
+//ham check so dien thoai
+    public void checkNumberPhone(){
+        PhoneBook phoneBook = new PhoneBook();
+        System.out.println("Mời nhập số điện thoại mới ");
+        String newnumberPhone;
+        do {
+            newnumberPhone = sc.next();
+            if(!checknumberPhoneSake( newnumberPhone))
+                System.out.println("Số điên thoai đã tồn tại mời nhập lai");
+        }while (!checknumberPhoneSake( newnumberPhone));
+        phoneBook.setNumberphone(newnumberPhone);
+    }
     //them danh ba
     public void addPhoneBook(){
         PhoneBook phoneBook = new PhoneBook();
@@ -51,14 +53,12 @@ public class PhoneBookManager {
         String fullName = sc.nextLine();
         System.out.println("Mời nhập địa chỉ");
         String address = sc.nextLine();
-        System.out.println("Mời nhập email");
-        String email = sc.nextLine();
+        nhapEmail();
         System.out.println("Mời nhập tên facebook");
         String fbName = sc.nextLine();
         phoneBook.setNumberphone(numberPhone);
         phoneBook.setName(fullName);
         phoneBook.setAddress(address);
-        phoneBook.setEmail(email);
         phoneBook.setNameFacebook(fbName);
         phoneBooks.add(phoneBook);
 
@@ -89,14 +89,7 @@ public void setPhoneBooks(){
                 String choose = sc.nextLine();
                 switch (choose){
                     case "1":
-                        System.out.println("Mời nhập số điện thoại mới ");
-                        String newnumberPhone;
-                        do {
-                            newnumberPhone = sc.next();
-                            if(!checknumberPhoneSake( newnumberPhone))
-                                System.out.println("Số điên thoai đã tồn tại mời nhập lai");
-                        }while (!checknumberPhoneSake( newnumberPhone));
-                        phoneBook.setNumberphone(newnumberPhone);
+                        checkNumberPhone();
                         break;
                     case "2":
                         System.out.println("Mời bạn nhập tên mới ");
@@ -107,13 +100,7 @@ public void setPhoneBooks(){
                       phoneBook.setAddress(sc.nextLine());
                         break;
                     case "4":
-                        String email;
-                        System.out.println("Nhập email mới");
-                        do {
-                            email = sc.next();
-                            if(!CheckInput.validate(email)) System.out.println("Nhập sai định dạng email mời nhập lại");
-                        }while (!CheckInput.validate(email));
-                      phoneBook.getEmail(sc.nextLine());
+                       nhapEmail();
                         break;
                     case  "5":
                         System.out.println("Mời bạn nhập fabook mơi ");
