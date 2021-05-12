@@ -6,6 +6,7 @@ public class PhoneBook {
     private String numberPhone;
     private String email;
     private String nameFacebook;
+
     public PhoneBook() {
     }
 
@@ -67,8 +68,5 @@ public class PhoneBook {
                 ", nameFacebook='" + nameFacebook + '\'' +
                 '}';
     }
-
-    public Object get(int i) {
-        return  null;
-    }
 }
+

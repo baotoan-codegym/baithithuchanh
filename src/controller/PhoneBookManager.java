@@ -13,17 +13,32 @@ public class PhoneBookManager {
 
     public PhoneBookManager() {
     }
-PhoneBook phoneBook = new PhoneBook();
+
     //them danh ba
     public void addPhoneBook(){
+        PhoneBook phoneBook = new PhoneBook();
         System.out.println("Mời nhập lần lượt các thông tin dưới đây");
         System.out.println("Số điện thoại cần tạo");
-        String numberPhone;
+        String numberPhone="";
         do {
-            numberPhone = sc.next();
+            numberPhone = sc.nextLine();
             if(!checknumberPhoneSake(numberPhone)) System.out.println("Số nay đã tồn tại mời nhập lại");
         }while (!checknumberPhoneSake(numberPhone));
+        System.out.println("Nhập tên");
+        String fullName = sc.nextLine();
+        System.out.println("Mời nhập địa chỉ");
+        String address = sc.nextLine();
+        System.out.println("Mời nhập email");
+        String email = sc.nextLine();
+        System.out.println("Mời nhập tên facebook");
+        String fbName = sc.nextLine();
+        phoneBook.setNumberphone(numberPhone);
+        phoneBook.setAddress(address);
+        phoneBook.setName(fullName);
+        phoneBook.setEmail(email);
+        phoneBook.setNameFacebook(fbName);
       phoneBooks.add(phoneBook);
+
     }
 //checck danh ba
     private boolean checknumberPhoneSake(String numberPhone) {
@@ -40,15 +55,17 @@ PhoneBook phoneBook = new PhoneBook();
 public void setPhoneBooks(){
     System.out.println("Mời số điện thoại cần sửa");
     String phoneNumber = sc.nextLine();
+    PhoneBook phoneBook = new PhoneBook();
     for (int i = 0; i < phoneBooks.size(); i++) {
-        if(phoneBook.getNumberphone().equals(phoneNumber)){
+        if(phoneNumber.equals(phoneBooks.get(i).getNumberphone())){
+            phoneBook = phoneBooks.get(i);
             boolean loop = true;
             while (loop){
                 System.out.println("Mời nhập lựa chọn \n 1. Thay đổi so dien thoai  \n 2. Thay đổi ten" +
                         " \n 3. thay doi dia chi \n 4. thay doi email \n 5.thay doi facebook \n 6.thoat");
-                int choose = sc.nextInt();
+                String choose = sc.nextLine();
                 switch (choose){
-                    case 1:
+                    case "1":
                         System.out.println("Mời nhập số điện thoại mới ");
                         String newnumberPhone;
                         do {
@@ -58,15 +75,15 @@ public void setPhoneBooks(){
                         }while (!checknumberPhoneSake( newnumberPhone));
                         phoneBook.setNumberphone(newnumberPhone);
                         break;
-                    case 2:
+                    case "2":
                         System.out.println("Mời bạn nhập tên mới ");
                         phoneBook.setName(sc.nextLine());
                         break;
-                    case 3:
+                    case "3":
                         System.out.println("Mời bạn thay đổi địa chỉ");
                       phoneBook.setAddress(sc.nextLine());
                         break;
-                    case 4:
+                    case "4":
                         String email;
                         System.out.println("Nhập email mới");
                         do {
@@ -75,11 +92,11 @@ public void setPhoneBooks(){
                         }while (!CheckInput.validate(email));
                       phoneBook.getEmail(sc.nextLine());
                         break;
-                    case  5:
+                    case  "5":
                         System.out.println("Mời bạn nhập fabook mơi ");
                         phoneBook.setNameFacebook(sc.nextLine());
                         break;
-                    case 6:
+                    case "6":
                         loop = false;
                         break;
                     default:
@@ -111,21 +128,21 @@ public void phoneBookMenu(){
             while (loop){
                 System.out.println("Mời lựa chọn: \n 1. Thêm danh ba \n 2. Sửa thông tin danh ba \n 3. Xoá danh ba theo sdt" +
                         "\n 4.Hien thi thong tin danh ba  \n 5.Thoát ra ngoài");
-                int choose = sc.nextInt();
+                String choose = sc.nextLine();
                 switch (choose){
-                    case 1:
+                    case "1":
                         addPhoneBook();
                         break;
-                    case 2:
+                    case "2":
                        setPhoneBooks();
                         break;
-                    case 3:
+                    case "3":
                         remotePhoneBook();
                         break;
-                    case 4:
+                    case "4":
                         showPhoneBook();
                         break;
-                    case 5:
+                    case "5":
                         loop=false;
                         break;
                     default:
