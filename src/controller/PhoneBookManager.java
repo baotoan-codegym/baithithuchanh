@@ -1,19 +1,41 @@
 package controller;
 
 import model.PhoneBook;
+import storage.TextFileFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class PhoneBookManager {
-    private List<PhoneBook>phoneBooks = new ArrayList<>();
+    private TextFileFactory textFileFactory = TextFileFactory.getINSTANCE();
+    private  ArrayList<PhoneBook>phoneBooks = new ArrayList<>();
     private Scanner sc = new Scanner(System.in);
 
 
     public PhoneBookManager() {
     }
-
+    // ham nhap thông tin danh bạ
+//public void nhapThôngTin(){
+//    System.out.println("Mời nhập số điện thoại");
+//    String telephone = sc.nextLine();
+//    System.out.println("Nhập tên");
+//    String fullName = sc.nextLine();
+//    System.out.println("Mời nhập địa chỉ");
+//    String address = sc.nextLine();
+//    System.out.println("Mời nhập email");
+//    String email = sc.nextLine();
+//    System.out.println("Mời nhập tên facebook");
+//    String fbName = sc.nextLine();
+//}
+////ham checksodienthoai
+//    public void checkNumberPhone() {
+//        System.out.println("Số điện thoại cần tạo");
+//        String numberPhone = "";
+//        numberPhone = sc.nextLine();
+//        if (!checknumberPhoneSake(numberPhone))
+//            System.out.println("Số nay đã tồn tại mời nhập lại");
+//    }
     //them danh ba
     public void addPhoneBook(){
         PhoneBook phoneBook = new PhoneBook();
@@ -22,7 +44,8 @@ public class PhoneBookManager {
         String numberPhone="";
         do {
             numberPhone = sc.nextLine();
-            if(!checknumberPhoneSake(numberPhone)) System.out.println("Số nay đã tồn tại mời nhập lại");
+            if(!checknumberPhoneSake(numberPhone))
+                System.out.println("Số nay đã tồn tại mời nhập lại");
         }while (!checknumberPhoneSake(numberPhone));
         System.out.println("Nhập tên");
         String fullName = sc.nextLine();
@@ -33,11 +56,11 @@ public class PhoneBookManager {
         System.out.println("Mời nhập tên facebook");
         String fbName = sc.nextLine();
         phoneBook.setNumberphone(numberPhone);
-        phoneBook.setAddress(address);
         phoneBook.setName(fullName);
+        phoneBook.setAddress(address);
         phoneBook.setEmail(email);
         phoneBook.setNameFacebook(fbName);
-      phoneBooks.add(phoneBook);
+        phoneBooks.add(phoneBook);
 
     }
 //checck danh ba
@@ -127,7 +150,7 @@ public void phoneBookMenu(){
             boolean loop = true;
             while (loop){
                 System.out.println("Mời lựa chọn: \n 1. Thêm danh ba \n 2. Sửa thông tin danh ba \n 3. Xoá danh ba theo sdt" +
-                        "\n 4.Hien thi thong tin danh ba  \n 5.Thoát ra ngoài");
+                        "\n 4.Hien thi thong tin danh ba  \n 5.Đọc dữ liệu  \n6.Ghi dữ liệu \n 7.Thoát ra ngoài");
                 String choose = sc.nextLine();
                 switch (choose){
                     case "1":
@@ -143,6 +166,12 @@ public void phoneBookMenu(){
                         showPhoneBook();
                         break;
                     case "5":
+                        readFile();
+                        break;
+                    case "6":
+                        writeFile();
+                        break;
+                    case "7":
                         loop=false;
                         break;
                     default:
@@ -150,6 +179,12 @@ public void phoneBookMenu(){
                         break;
                 }
             }
+    }
+    public void readFile(){
+       phoneBooks = textFileFactory.readerFile("data.csv");
+    }
+    public void writeFile(){
+        textFileFactory.saveFile(phoneBooks,"data.csv");
     }
 }
 
